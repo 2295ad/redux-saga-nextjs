@@ -1,9 +1,9 @@
 
 function reducer(state='',action){
     switch(action.type){
-        case 'ADD':return{...state,add:action.data+1}
+        case 'fact':return{...state,fact:action.data}
           break;
-        case 'SUB': return{...state,sub:action.data-1}
+        case 'dissolve': return{...state,sub:action.data}
           break;
         default:return state;
     }

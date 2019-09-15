@@ -1,2 +1,3 @@
-export const getData=(data)=>({type:'ADD',data:data})
-export const getMoreData = (data)=>({type:'SUB',data:data-1})
+export const getFacts=(data)=>({type:'fact',data:data})
+export const dissolve = (data)=>({type:'dissolve',data:data})
+export const error = (data)=>({type:'error',data:data})
