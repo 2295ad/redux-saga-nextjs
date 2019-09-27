@@ -4,7 +4,6 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import {getFacts, dissolve, error} from '../helper/actions';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import axios from 'axios';
 import Card from 'react-bootstrap/Card'
 
 // https://uselessfacts.jsph.pl/random.json?language=en
@@ -22,13 +21,16 @@ class IndexCompont extends React.Component{
   async getFact(){
    try{
     const {getFacts, error} = this.props
-    let resp = await axios.get("https://uselessfacts.jsph.pl/random.json?language=en");
-    if(resp.data.text){
-      getFacts(resp.data.text)
-    }else{
-      error('LOADING API FAILED!!!')
-    } 
+    console.log('p')
+    console.log('iiii')
+    getFacts()
+    // let resp = await axios.get("https://uselessfacts.jsph.pl/random.json?language=en");
+    // if(resp.data.text){
+    //   getFacts(resp.data.text)
+    // }else{
+    // } 
    }catch(e){
+     error('LOADING API FAILED!!!')
      console.log("API ERROR",e)
    }
   }
@@ -39,9 +41,9 @@ class IndexCompont extends React.Component{
        <img src="static/beer.jpg"/>
        <br/>
        <br/>
-       <i>WANNA KNOW SOME COOL FACTS!!</i>
+       <i> KNOW SOME COOL FACTS!!</i>
        <br/>
-       <Button variant="primary" onClick={this.getFact}> Click Me!</Button>
+       <Button variant="primary" onClick={()=>this.getFact()}> Click Me!</Button>
        <br/>
        <br/>
        <Card className="text-center">
