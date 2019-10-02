@@ -9,7 +9,7 @@ const logger = createLogger({
     
   });
   const sagaMiddleware = createSagaMiddleware()
-  const enhancer = compose(applyMiddleware(sagaMiddleware))
+  const enhancer = compose(applyMiddleware(sagaMiddleware,logger))
 
 export const storeState = createStore(reducer, enhancer);
 sagaMiddleware.run(rootSaga)

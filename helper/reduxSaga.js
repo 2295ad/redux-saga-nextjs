@@ -4,7 +4,8 @@ import axios from 'axios';
  function* writeFacts(){
     console.log('klao')
    let res = yield call(axios.get,'https://uselessfacts.jsph.pl/random.json?language=en')
-   yield put({type:'write',data:res.text})
+   console.log(res)
+   yield put({type:'write',data:res.data.text})
  }
 
 

@@ -21,18 +21,16 @@ class IndexCompont extends React.Component{
   async getFact(){
    try{
     const {getFacts, error} = this.props
-    console.log('p')
-    console.log('iiii')
     getFacts()
-    // let resp = await axios.get("https://uselessfacts.jsph.pl/random.json?language=en");
-    // if(resp.data.text){
-    //   getFacts(resp.data.text)
-    // }else{
-    // } 
+    dissolve(false)
    }catch(e){
      error('LOADING API FAILED!!!')
      console.log("API ERROR",e)
    }
+  }
+  async dissolve(){
+    const {dissolve} = this.props
+    dissolve(true)
   }
 
   render(){
@@ -46,14 +44,14 @@ class IndexCompont extends React.Component{
        <Button variant="primary" onClick={()=>this.getFact()}> Click Me!</Button>
        <br/>
        <br/>
-       <Card className="text-center">
+       <Card className="text-center" style={{display:this.props.dissolver?'none':'block'}}>
         <Card.Header>RANDOM FACTS</Card.Header>
         <Card.Body>
           <Card.Title></Card.Title>
           <Card.Text>
            {this.props.info}
           </Card.Text>
-          <Button variant="primary" size="sm" onClick={()=>this.props.dissolve('close')}>X</Button>
+          <Button variant="primary" size="sm" onClick={()=>this.dissolve()}>X</Button>
         </Card.Body>
         {/* <Card.Footer className="text-muted">2 days ago</Card.Footer> */}
       </Card>
@@ -74,7 +72,8 @@ class IndexCompont extends React.Component{
 }
 
 const mapStateToProps = (state)=>({  
-        info:state.fact
+        info:state.fact,
+        dissolver:state.dissolve
       })
 
 const mapDispatchToProps = (dispatch)=>
