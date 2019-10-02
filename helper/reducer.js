@@ -1,14 +1,33 @@
+import { combineReducers } from 'redux'
 
-function reducer(state='',action){
+ function fact(state='',action){
     switch(action.type){
         case 'fact':return state
           break;
-        case 'dissolve': return{...state,sub:action.data}
-          break;
-        case 'write': return {...state, fact:action.data}
-        default:return state;
+        default: return state;
+        
     }
 }
 
+ function dissolve(state=true,action){
+  switch(action.type){
+    case 'dissolve': return action.data
+                    break;
+    default: return state;
+  }
+}
 
-export default reducer;
+
+function writeFact(state = '',action){
+  switch(action.type){
+    case 'write': return action.data
+     break;
+    default:return state;
+    }
+}
+
+export default combineReducers({
+  fact,
+  dissolve,
+  writeFact
+})

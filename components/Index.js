@@ -18,22 +18,26 @@ class IndexCompont extends React.Component{
 
   }
 
+  //dispatch action
+  //saga will trigger an action for every getFacts() & get real facts from api.
+  //dissolve() is used to hide/show the div
   async getFact(){
    try{
-    const {getFacts, error} = this.props
+    const {getFacts, dissolve} = this.props
     getFacts()
-    dissolve(false)
+    dissolve(true)
    }catch(e){
      error('LOADING API FAILED!!!')
      console.log("API ERROR",e)
    }
   }
-  async dissolve(){
+   dissolve(){
     const {dissolve} = this.props
-    dissolve(true)
+    dissolve(false)
   }
 
   render(){
+    console.log(this.props.dissolver)
     return(
       <div className="demo">
        <img src="static/beer.jpg"/>
@@ -44,9 +48,10 @@ class IndexCompont extends React.Component{
        <Button variant="primary" onClick={()=>this.getFact()}> Click Me!</Button>
        <br/>
        <br/>
-       <Card className="text-center" style={{display:this.props.dissolver?'none':'block'}}>
+       <div style={{display:this.props.dissolver?'block':'none'}}>
+       <Card className="text-center" >
         <Card.Header>RANDOM FACTS</Card.Header>
-        <Card.Body>
+        <Card.Body >
           <Card.Title></Card.Title>
           <Card.Text>
            {this.props.info}
@@ -55,7 +60,7 @@ class IndexCompont extends React.Component{
         </Card.Body>
         {/* <Card.Footer className="text-muted">2 days ago</Card.Footer> */}
       </Card>
-
+      </div>
       <style jsx>{`
       img {
         width: 25%;
@@ -72,7 +77,7 @@ class IndexCompont extends React.Component{
 }
 
 const mapStateToProps = (state)=>({  
-        info:state.fact,
+        info:state.writeFact,
         dissolver:state.dissolve
       })
 
